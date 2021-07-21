@@ -3,7 +3,7 @@ const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const path = require("path");
 
-module.exports = {
+const config = {
   entry: {
     app: "./assets/js/script.js",
     events: "./assets/js/events.js",
@@ -17,26 +17,26 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jpg$/i,
+        test: /\.(png|jpg?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
               esModule: false,
-              name (file) {
-                return "[path][name].[ext]"
+              name(file) {
+                return "[path][name].[ext]";
               },
-              publicPath: function(url) {
-                return url.replace("../", "/assets/")
-              }
-            }
+              publicPath: function (url) {
+                return url.replace("../", "/assets/");
+              },
+            },
           },
           {
-            loader: 'image-webpack-loader'
-          }
-        ]
-      }
-    ]
+            loader: "image-webpack-loader",
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -49,3 +49,5 @@ module.exports = {
   ],
   mode: "development",
 };
+
+module.exports = config;
